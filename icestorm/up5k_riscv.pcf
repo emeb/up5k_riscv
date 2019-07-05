@@ -1,0 +1,27 @@
+# for rev 0.1 of up5k_usb board use clk_16 = 44
+# for rev 0.2 of up5k_usb board use clk_16 = 35
+set_io clk_16 35
+
+set_io RX 26
+set_io TX 25
+
+set_io spi0_mosi 14
+set_io spi0_miso 17
+set_io spi0_sclk 15
+set_io spi0_cs0 16
+
+set_io spi1_mosi 42
+set_io spi1_miso 44
+set_io spi1_sclk 37
+set_io spi1_cs0 38
+
+set_io lcd_nrst 34
+set_io lcd_dc 36
+
+set_io d1 27
+set_io d2 28
+
+set_io RGB0 39
+set_io RGB1 40
+set_io RGB2 41
+

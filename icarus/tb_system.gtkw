@@ -1,0 +1,101 @@
+[*]
+[*] GTKWave Analyzer v3.3.94 (w)1999-2018 BSI
+[*] Tue Jul  2 05:14:05 2019
+[*]
+[dumpfile] "/home/ericb/Engineering/KBADC/lattice/up5k_riscv/icarus/tb_system.vcd"
+[dumpfile_mtime] "Tue Jul  2 05:10:06 2019"
+[dumpfile_size] 17342314
+[savefile] "/home/ericb/Engineering/KBADC/lattice/up5k_riscv/icarus/tb_system.gtkw"
+[timestart] 0
+[size] 1366 669
+[pos] -1 -1
+*-23.000000 13377000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_system.
+[treeopen] tb_system.uut.
+[treeopen] tb_system.uut.uwbb.
+[sst_width] 219
+[signals_width] 228
+[sst_expanded] 1
+[sst_vpaned_height] 162
+@200
+-TB
+@28
+tb_system.RX
+tb_system.TX
+tb_system.clk24
+@22
+tb_system.gp_out[31:0]
+@28
+tb_system.reset
+@200
+-UUT
+@28
+tb_system.uut.RX
+tb_system.uut.TX
+tb_system.uut.clk24
+@22
+tb_system.uut.gp_out[31:0]
+@28
+tb_system.uut.gpo_sel
+@22
+tb_system.uut.mem_addr[31:0]
+@28
+tb_system.uut.mem_instr
+@22
+tb_system.uut.mem_rdata[31:0]
+@28
+tb_system.uut.mem_rdy
+tb_system.uut.mem_ready
+tb_system.uut.mem_valid
+@22
+tb_system.uut.mem_wdata[31:0]
+tb_system.uut.mem_wstrb[3:0]
+tb_system.uut.ram_do[31:0]
+@28
+tb_system.uut.ram_sel
+tb_system.uut.reset
+@22
+tb_system.uut.rom_do[31:0]
+@28
+tb_system.uut.rom_sel
+@22
+tb_system.uut.ser_do[7:0]
+@28
+tb_system.uut.ser_sel
+tb_system.uut.spi0_cs0
+tb_system.uut.spi0_miso
+tb_system.uut.spi0_mosi
+tb_system.uut.spi0_sclk
+@22
+tb_system.uut.wbb_do[7:0]
+@28
+tb_system.uut.wbb_rdy
+tb_system.uut.wbb_sel
+@201
+-WB
+@22
+tb_system.uut.uwbb.uwbm.addr[7:0]
+@28
+tb_system.uut.uwbb.uwbm.busy
+tb_system.uut.uwbb.uwbm.clk
+tb_system.uut.uwbb.uwbm.cs
+@22
+tb_system.uut.uwbb.uwbm.din[7:0]
+tb_system.uut.uwbb.uwbm.dout[7:0]
+@28
+tb_system.uut.uwbb.uwbm.rdy
+tb_system.uut.uwbb.uwbm.rst
+@22
+tb_system.uut.uwbb.uwbm.timeout[3:0]
+@28
+tb_system.uut.uwbb.uwbm.wb_acki
+@22
+tb_system.uut.uwbb.uwbm.wb_adro[7:0]
+tb_system.uut.uwbb.uwbm.wb_dati[7:0]
+tb_system.uut.uwbb.uwbm.wb_dato[7:0]
+@28
+tb_system.uut.uwbb.uwbm.wb_rwo
+tb_system.uut.uwbb.uwbm.wb_stbo
+tb_system.uut.uwbb.uwbm.we
+[pattern_trace] 1
+[pattern_trace] 0

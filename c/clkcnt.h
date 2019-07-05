@@ -1,0 +1,14 @@
+/*
+ * clkcnt.h - clock cycle counter driver
+ * 07-03-19 E. Brombaugh
+ */
+
+#ifndef __clkcnt__
+#define __clkcnt__
+
+#include "up5k_riscv.h"
+
+void clkcnt_delayms(uint32_t ms);
+
+#endif
+
