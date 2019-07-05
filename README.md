@@ -53,7 +53,7 @@ a raw rgb565-encoded image in 240x320 dimensions at flash location 0x200000
 which will be BLITed to the screen. A helper script to properly format the
 image is located in the "tools" directory.
 
-##Thanks
+## Thanks
 
 Thanks to the developers of all the tools and cores used for this. In particular
 
