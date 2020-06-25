@@ -4,7 +4,7 @@ There are many RISC V projects on iCE40. This one is mine.
 ## What is it?
 A small RISC V system built on an iCE40 UP5k FPGA which includes the following:
 
-* Clifford Wolf's PicoRV32 CPU
+* Claire Wolf's PicoRV32 CPU
 * 8kB boot ROM in dedicated BRAM
 * 64kB instruction/data RAM in SPRAM
 * Dedicated hard IP core SPI interface to configuration flash
@@ -64,6 +64,6 @@ on the bus at the expected address then you will see "." characters, otherwise
 
 Thanks to the developers of all the tools and cores used for this. In particular
 
-* Clifford Wolf <clifford@clifford.at> for the picorv32 and icestorm, etc.
+* Claire Wolf <clifford@clifford.at> for the picorv32 and icestorm, etc.
 * Sylvain Munaut for working examples and assistance.
 * Dave Shah for knowing almost everything.
