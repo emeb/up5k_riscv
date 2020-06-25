@@ -19,6 +19,14 @@ void acia_putc(char c)
 }
 
 /*
+ * output for tiny printf
+ */
+void acia_printf_putc(void* p, char c)
+{
+	acia_putc(c);
+}
+
+/*
  * serial transmit string
  */
 void acia_puts(char *str)

@@ -22,6 +22,10 @@ module up5k_riscv(
 			spi1_sclk,
 			spi1_cs0,
 	
+	// I2C0 port on PMOD
+	inout	i2c0_sda,
+			i2c0_scl,
+	
 	// GP Out for LCD
 	output lcd_nrst, lcd_dc,
 	
@@ -105,6 +109,9 @@ module up5k_riscv(
 		.spi1_miso(spi1_miso),
 		.spi1_sclk(spi1_sclk),
 		.spi1_cs0(spi1_cs0),
+	
+		.i2c0_sda(i2c0_sda),
+		.i2c0_scl(i2c0_scl),
 	
 		.gp_out(gpio_o)
 	);

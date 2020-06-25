@@ -9,6 +9,7 @@
 #include "up5k_riscv.h"
 
 void acia_putc(char c);
+void acia_printf_putc(void* p, char c);
 void acia_puts(char *str);
 int acia_getc(void);
 

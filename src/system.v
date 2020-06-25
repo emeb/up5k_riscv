@@ -22,6 +22,9 @@ module system(
 			spi1_sclk,
 			spi1_cs0,
 	
+	inout	i2c0_sda,		// I2C core 0
+			i2c0_scl,
+	
 	output reg [31:0] gp_out
 );
 	// CPU
@@ -130,7 +133,9 @@ module system(
 		.spi1_mosi(spi1_mosi),	// spi core 1 mosi
 		.spi1_miso(spi1_miso),	// spi core 1 miso
 		.spi1_sclk(spi1_sclk),	// spi core 1 sclk
-		.spi1_cs0(spi1_cs0)		// spi core 1 cs
+		.spi1_cs0(spi1_cs0),	// spi core 1 cs
+		.i2c0_sda(i2c0_sda),	// i2c core 0 data
+		.i2c0_scl(i2c0_scl)		// i2c core 0 clk
 	);
 	
 	// Resettable clock counter

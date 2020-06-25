@@ -6,13 +6,21 @@
 #include "clkcnt.h"
 
 /*
+ * delay for clocks
+ */
+void clkcnt_wait(uint32_t clks)
+{
+	clkcnt_reg = 0;
+	
+	while(clkcnt_reg < clks);
+}
+
+/*
  * delay for exactly 1 millisecond
  */
 void clkcnt_1ms(void)
 {
-	clkcnt_reg = 0;
-	
-	while(clkcnt_reg < 24000);
+	clkcnt_wait(24000);
 }
 
 /*

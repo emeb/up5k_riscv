@@ -6,31 +6,12 @@
 #include <stdio.h>
 #include "up5k_riscv.h"
 #include "acia.h"
+#include "printf.h"
 #include "spi.h"
 #include "flash.h"
 #include "clkcnt.h"
 #include "ili9341.h"
-
-/*
- * convert a u32 to string of n hex digits
- */
-void u32tostr(char *dst, uint32_t val, uint8_t n)
-{
-	uint8_t c;
-	
-	/* loop over 8 nybbles, left to right */
-	while(n)
-	{
-		/* get high nybble as ascii hex */
-		c = (val>>(4*(n-1)))&0xf;
-		c = (c>9) ? c + 7 : c;
-		*dst++ = c + 0x30;
-		n--;
-	}
-	
-	/* add trailing null */
-	*dst = 0;
-}
+#include "i2c.h"
 
 /*
  * main... duh
@@ -39,9 +20,9 @@ void main()
 {
 	uint32_t cnt, spi_id, i, j;
 	//int c;
-	char buffer[32];
 	
-	acia_puts("\n\r\n\rup5k_riscv - starting up\n\r");
+	init_printf(0,acia_printf_putc);
+	printf("\n\n\rup5k_riscv - starting up\n\r");
 	
 	/* test both SPI ports */
 	spi_init(SPI0);
@@ -50,10 +31,7 @@ void main()
 	/* get spi flash id */
 	flash_init(SPI0);	// wake up the flash chip
 	spi_id = flash_id(SPI0);
-	u32tostr(buffer, spi_id, 8);
-	acia_puts("spi id: 0x");
-	acia_puts(buffer);
-	acia_puts("\n\r");
+	printf("spi flash id: 0x%08X\n\r", spi_id);
 	
 #if 0
 	/* read some data */
@@ -62,22 +40,19 @@ void main()
 		flash_read(SPI0, read, 0, 256);
 		for(i=0;i<256;i+=8)
 		{
-			u32tostr(buffer, i, 2);
-			acia_puts(buffer);
-			acia_puts(": ");
+			printf("0x%02X: ", i);
 			for(j=0;j<8;j++)
 			{
-				u32tostr(buffer, read[i+j], 2);
-				acia_puts(buffer);
-				acia_puts(" ");
+				printf("0x%02X ", read[i+j]);
 			}
-			acia_puts("\n\r");
+			printf("\n\r");
 		}
 	}
 #endif
 
 	/* Test LCD */
 	ili9341_init(SPI1);
+	printf("LCD initialized\n\r");
 	
 #if 1
 	/* color fill + text fonts */
@@ -124,7 +99,7 @@ void main()
 	clkcnt_delayms(1000);
 #endif
 
-#if 1
+#if 0
 	/* test image blit from flash */
 	{
 		uint16_t blit[ILI9341_TFTWIDTH*4];
@@ -140,12 +115,21 @@ void main()
 	}
 #endif
 
+	/* Test I2C */
+	i2c_init(I2C0);
+	printf("I2C0 Initialized\n\r");
+
 	cnt = 0;
 	while(1)
 	{
 		gp_out = (gp_out&~(7<<17))|((cnt&7)<<17);
+		
+		if(i2c_tx(I2C0, 0x1A, (uint8_t *)&cnt, 2))
+			acia_putc('x');
+		else
+			acia_putc('.');
+		
 		cnt++;
-		acia_putc('.');
 		
 #if 0
 		/* simple echo */

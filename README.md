@@ -9,6 +9,7 @@ A small RISC V system built on an iCE40 UP5k FPGA which includes the following:
 * 64kB instruction/data RAM in SPRAM
 * Dedicated hard IP core SPI interface to configuration flash
 * Additional hard IP core SPI, currently used for an ILI9341 LCD
+* Dedicated hard IP core I2C for testing
 * 115k serial port
 * 32-bit output port (for LEDs, LCD control, etc)
 * GCC firmware build
@@ -45,7 +46,9 @@ You should see a message:
 
 	up5k_riscv - starting up
 	spi id: 0x00EF4016
-	....
+	LCD initialized
+	I2C0 Initialized
+	xxxx...
 	
 If you have an LCD connected to the SPI1 port pins on the FPGA then it should
 display several different screens to demonstrate the graphics. You can store
@@ -53,10 +56,14 @@ a raw rgb565-encoded image in 240x320 dimensions at flash location 0x200000
 which will be BLITed to the screen. A helper script to properly format the
 image is located in the "tools" directory.
 
+A new addition is testing of the SB_I2C hard core. If you have an I2C device
+on the bus at the expected address then you will see "." characters, otherwise
+"x" will be printed.
+
 ## Thanks
 
 Thanks to the developers of all the tools and cores used for this. In particular
 
 * Clifford Wolf <clifford@clifford.at> for the picorv32 and icestorm, etc.
 * Sylvain Munaut for working examples and assistance.
-
+* Dave Shah for knowing almost everything.

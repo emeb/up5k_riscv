@@ -19,7 +19,9 @@ module wb_bus(
 	inout spi1_mosi,		// spi core 1 mosi
 	inout spi1_miso,		// spi core 1 miso
 	inout spi1_sclk,		// spi core 1 sclk
-	inout spi1_cs0			// spi core 1 cs
+	inout spi1_cs0,			// spi core 1 cs
+	inout i2c0_sda,			// i2c core 0 data
+	inout i2c0_scl			// i2c core 0 clock
 );
 
 	// the wishbone master
@@ -318,7 +320,93 @@ module wb_bus(
 		.D_IN_1()
 	);
 	
+	// I2C IP Core
+	wire sda_oe_0, sda_i_0, sda_o_0;			// sda components
+	wire scl_oe_0, scl_i_0, scl_o_0;			// scl components
+	wire [7:0] sbdato_2;
+	wire sbacko_2;
+	SB_I2C #(
+		.BUS_ADDR74("0b0001")
+	) 
+	i2cInst0 (
+		.SBCLKI(clk),
+		.SBRWI(sbrwi),
+		.SBSTBI(sbstbi),
+		.SBADRI7(sbadri[7]),
+		.SBADRI6(sbadri[6]),
+		.SBADRI5(sbadri[5]),
+		.SBADRI4(sbadri[4]),
+		.SBADRI3(sbadri[3]),
+		.SBADRI2(sbadri[2]),
+		.SBADRI1(sbadri[1]),
+		.SBADRI0(sbadri[0]),
+		.SBDATI7(sbdati[7]),
+		.SBDATI6(sbdati[6]),
+		.SBDATI5(sbdati[5]),
+		.SBDATI4(sbdati[4]),
+		.SBDATI3(sbdati[3]),
+		.SBDATI2(sbdati[2]),
+		.SBDATI1(sbdati[1]),
+		.SBDATI0(sbdati[0]),
+		.SCLI(scl_i_0),
+		.SDAI(sda_i_0),
+		.SBDATO7(sbdato_2[7]),
+		.SBDATO6(sbdato_2[6]),
+		.SBDATO5(sbdato_2[5]),
+		.SBDATO4(sbdato_2[4]),
+		.SBDATO3(sbdato_2[3]),
+		.SBDATO2(sbdato_2[2]),
+		.SBDATO1(sbdato_2[1]),
+		.SBDATO0(sbdato_2[0]),
+		.SBACKO(sbacko_2),
+		.I2CIRQ(),
+		.I2CWKUP(),
+		.SCLO(scl_o_0),
+		.SCLOE(scl_oe_0),
+		.SDAO(sda_o_0),
+		.SDAOE(sda_oe_0)
+	);
+	
+	// I/O drivers are tri-state output w/ simple input
+	// SDA driver
+	SB_IO #(
+		.PIN_TYPE(6'b101001),
+		.PULLUP(1'b1),
+		.NEG_TRIGGER(1'b0),
+		.IO_STANDARD("SB_LVCMOS")
+	) usda (
+		.PACKAGE_PIN(i2c0_sda),
+		.LATCH_INPUT_VALUE(1'b0),
+		.CLOCK_ENABLE(1'b0),
+		.INPUT_CLK(1'b0),
+		.OUTPUT_CLK(1'b0),
+		.OUTPUT_ENABLE(sda_oe_0),
+		.D_OUT_0(sda_o_0),
+		.D_OUT_1(1'b0),
+		.D_IN_0(sda_i_0),
+		.D_IN_1()
+	);
+	
+	// SCL driver
+	SB_IO #(
+		.PIN_TYPE(6'b101001),
+		.PULLUP(1'b1),
+		.NEG_TRIGGER(1'b0),
+		.IO_STANDARD("SB_LVCMOS")
+	) uscl (
+		.PACKAGE_PIN(i2c0_scl),
+		.LATCH_INPUT_VALUE(1'b0),
+		.CLOCK_ENABLE(1'b0),
+		.INPUT_CLK(1'b0),
+		.OUTPUT_CLK(1'b0),
+		.OUTPUT_ENABLE(scl_oe_0),
+		.D_OUT_0(scl_o_0),
+		.D_OUT_1(1'b0),
+		.D_IN_0(scl_i_0),
+		.D_IN_1()
+	);
+	
 	// OR muxing of output data & ack
-	assign sbdato = sbdato_0 | sbdato_1;
-	assign sbacko = sbacko_0 | sbacko_1;
+	assign sbdato = sbdato_0 | sbdato_1 | sbdato_2;
+	assign sbacko = sbacko_0 | sbacko_1 | sbacko_2;
 endmodule

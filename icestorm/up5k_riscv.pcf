@@ -15,6 +15,9 @@ set_io spi1_miso 44
 set_io spi1_sclk 37
 set_io spi1_cs0 38
 
+set_io i2c0_sda 21
+set_io i2c0_scl 19
+
 set_io lcd_nrst 34
 set_io lcd_dc 36
 
